@@ -1,0 +1,63 @@
+CREATE GRAPH TYPE miniGraph STRICT {
+	(personType: Person { name STRING }),
+	(:personType)
+		-[knowsType :  Knows { since DATE }] ->
+	(:personType)
+}
+
+Graph : 
+
+(n1: Person {name=„Anna“})
+(n2: Person {name=„Ben“})
+(n1)-[e1: Knows {since=2020-01-01}]->(n2)
+
+Translate Graph -> Facts
+
+clingo: 
+
+node(n1). label(n1, „Person“). val(n1, name, string).
+node(n2). label(n2, „Person“). val(n2, name, string).
+edge(e1,n1,n2). label(e1, „Knows“). val(e1, since, date).
+
+Normalization:
+personType = Person{} & {name STRING}
+knowsType = (personType) & ()-[Knows{}]->() & ()-[{since DATE}]->() & (personType)
+
+Tree:
+personType:  p0 (&)
+ -> p1 Label Person
+ -> p2 name: STRING
+
+knowsType: k0 (&)
+ -> k1 -> personType [Source]
+	-> p1 Label Person
+	-> p2 name String
+ -> k2 Label Knows [edge]
+ -> k3 since: DATE [edge]
+ -> k4 -> personType [Target]
+	-> p1 Label Person
+	-> p2 name String
+
+clingo:
+
+nodetype(personType).
+root(personType, p0). and(p0). child(p0,p1). child(p0,p2).
+atom(p1, label(„Person“)). atom(p2, prop(name, string)).
+
+edgetype(knowsType).
+root(knowsType, k0). and(k0). child(k0,k1;k0,k2;k0,k3;k0,k4).
+ref(k1, personType, src)
+atom(k2, edge, label(„Knows“)).
+atom(k3, edge, prop(since, date)).
+ref(k4, personType, tgt).
+
+(person: Person & (person | customer))
+
+&|&-free type -> PTIME
+branch sets
+
+LOOSE PG-Keys -> true or false decision
+
+STRICT to have a typing or a true or false decision
+
+python program neo4j database export -> clingo input
