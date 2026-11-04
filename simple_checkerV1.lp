@@ -4,7 +4,7 @@
 % Checks the nodes of a property graph against the node types of a PG-Schema graph type and
 % computes a possible typing: every pair(node, type) such that the node conforms to the type
 %
-% Input
+% Input:
 %   Graph:  node(X)   X is a node
 %           label(X, L) node X has label L
 %           val(X, K, D)  node X has property K with a value of datatype D
@@ -19,7 +19,7 @@
 %           labelopen   label wildcard (OPEN on Labels)
 %           propopen    property wildcard (OPEN on properties)
 %
-%   Output:
+% Output:
 %       conf(X, T)  node X conforms to type T
 %       Run with --enum-mode=brave: X conforms to T as soon as SOME choice of option works. The
 %       last model printed is the final typing
