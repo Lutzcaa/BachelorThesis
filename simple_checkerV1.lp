@@ -1,11 +1,30 @@
-% This program checks a PG Graph against a Schema in PG Schema Format
-% This Program right now only supports checking Nodes and Nodetypes
-% Edges, Abstract types and &|&-instances have yet to be implemented.
+% ========================================================================================
+% PG-Types conformance checker (simple version, V2)
+% ----------------------------------------------------------------------------------------
+% Checks the nodes of a property graph against the node types of a PG-Schema graph type and
+% computes a possible typing: every pair(node, type) such that the node conforms to the type
+%
+% Input
+%   Graph:  node(X)   X is a node
+%           label(X, L) node X has label L
+%           val(X, K, D)  node X has property K with a value of datatype D
+%   Schema: node types in three-layer form
+%           alt(T, Y)      type T has alternative Y
+%           conj(Y, G)     alternative Y has conjunct G
+%           opt(G, A)      conjunct G has option A
+%   Atoms A: 
+%           label(L)   label L
+%           prop(K, D)  property K of datatype D
+%           blank       empty type (used for OPTIONAL properties)
+%           labelopen   label wildcard (OPEN on Labels)
+%           propopen    property wildcard (OPEN on properties)
+%
+%   Output:
+%       conf(X, T)  node X conforms to type T
+%       Run with --enum-mode=brave: X conforms to T as soon as SOME choice of option works. The
+%       last model printed is the final typing
+%              
 
-% The program returns a possible typing for all nodes against the node types
-% defined in the given Schema
-% If a node does not fit a type, it does not get a type
-% The program on its own does not check if a graph checks out against a graphtype
 
 elem(X) :- node(X).
 
