@@ -1,6 +1,6 @@
 % This program checks a PG Graph against a Schema in PG Schema Format
 % This Program right now only supports checking Nodes and Nodetypes
-% OPEN, Edges, Abstract types and &|&-instances have yet to be implemented.
+% Edges, Abstract types and &|&-instances have yet to be implemented.
 
 % The program returns a possible typing for all nodes against the node types
 % defined in the given Schema
@@ -20,8 +20,12 @@ comp(X, prop(K)) :- val(X,K,_).
 % -----------------------------------------------------------------------------------
 % Compatibility: select which schema atoms the node SATISFIES. Only these may be chosen 
 % ("must" direction). blank (the empty type used for OPTIONAL) is satisfied by every node
+%
+% Changes in V2: Add OPEN for Labels and Properties to the compatibility layer.
 % -----------------------------------------------------------------------------------
 compat(X, blank) :- elem(X).
+compat(X, labelopen) :- elem(X).
+compat(X, propopen) :- elem(X).
 compat(X, label(L))  :- label(X,L).
 compat(X, prop(K,D)) :- val(X,K,D).
 
@@ -46,6 +50,8 @@ cand(X, Y) :- alt(_, Y), elem(X), not dead(X, Y).
 % -----------------------------------------------------------------------------------
 covers(label(L), lab(L)) :- opt(_, label(L)).
 covers(prop(K,D), prop(K)) :- opt(_, prop(K, D)).
+covers(labelopen, lab(L)) :- label(_, L).
+covers(propopen, prop(K)) :- val(_, K, _).
 
 % A component is covered if some chosen option explains it. The choice
 % fails if a component of the node remains unexplained (it is not
