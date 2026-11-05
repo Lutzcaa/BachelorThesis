@@ -1,5 +1,5 @@
 % =====================================================================
-% typen_simple.lp  –  Typen in der Drei-Schichten-Form (alt / conj / opt)
+% typen_simple.lp  –  Types in three layer form (alt / conj / opt)
 % =====================================================================
 % personType = Person {name STRING, OPTIONAL birthday DATE}
 alt(personType,a1).

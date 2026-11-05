@@ -83,6 +83,6 @@ fail(X, Y) :- cand(X,Y), comp(X, C), not covered(X, Y, C).
 % and the chosen options cover all components of X. No constraint is used, so a failing
 % pair does not eliminate the typing of the other pairs.
 % -----------------------------------------------------------------------------------
-conf(X,T) :- alt(T, Y), cand(X, Y), not fail(X, Y).
+conf(X,T) :- alt(T, Y), cand(X, Y), not fail(X, Y). 
 
 #show conf/2.

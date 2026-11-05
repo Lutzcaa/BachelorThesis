@@ -1,5 +1,5 @@
 % =====================================================================
-% daten.lp  –  Der Beispielgraph (derselbe wie in der Visualisierung)
+% daten.lp  – Testing Graph
 % =====================================================================
 node(u1). label(u1,"Person").  label(u1,"Customer").                     val(u1,id,int).
 node(u2). label(u2,"Company").                    val(u2,name,string).  val(u2,vat,string).
