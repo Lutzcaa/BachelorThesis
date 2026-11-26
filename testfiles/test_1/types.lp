@@ -34,3 +34,11 @@ root(customer, k0).
             ref(k4, person).
             ref(k5, company).
         atom(k3, prop(id, int)).
+
+% (employee : person & Employee {salary INT}),
+nodeType(employee).
+root(employee, em0).
+    and(em0). child(em0, em1; em0, em2; em0, em3).
+        ref(em1, person).
+        atom(em2, label("Employee")).
+        atom(em3, prop(salary, int)).

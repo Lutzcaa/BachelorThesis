@@ -5,10 +5,10 @@ dir = "testfiles/" + test + "/"
 
 
 ctl = clingo.Control(["0", "--enum-mode=brave"])
-#ctl.load(dir + "data.lp")
-#ctl.load(dir + "types.lp")
-
-ctl.load(dir + "shared_ref_test.lp")
+ctl.load(dir + "data.lp")
+ctl.load(dir + "types.lp")
+ctl.load(dir + "edges.lp")
+ctl.load(dir + "edgeTypes.lp")
 
 ctl.load("pg_types_checker.lp")
 ctl.ground([("base", [])])

@@ -14,3 +14,9 @@ node(u5). label(u5, "Person"). label(u5, "Company"). label(u5, "Customer"). val(
 
 % type Customer
 node(u6). label(u6, "Person"). label(u6, "Customer"). val(u6, name, string). val(u6, birthday, date). val(u6, id, int).
+
+% edge type test
+node(u7). label(u7, "Person"). label(u7, "Employee").
+          val(u7, name, string). val(u7, salary, int).
+node(u8). label(u8, "Person"). label(u8, "Employee").
+          val(u8, name, string). val(u8, salary, int). val(u8, birthday, date).
