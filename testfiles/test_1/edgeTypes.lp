@@ -32,6 +32,8 @@ root(friend, fr0).
         atom(fr3, pos(edge, prop(since, date))).
         ref(fr4, person, tgt).
 
+% (:employee)-[buddy : friend & Buddy]->(:employee)
+
 edgeType(buddy).
 root(buddy, bu0).
     and(bu0). child(bu0, bu1; bu0, bu2; bu0, bu3; bu0, bu4).
